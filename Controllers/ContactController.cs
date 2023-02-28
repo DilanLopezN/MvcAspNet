@@ -67,5 +67,15 @@ namespace ASPNetMVC.Controllers
       return RedirectToAction(nameof(Index));
     }
 
+    public ActionResult Details(int Id)
+    {
+      var contact = _context.Contacts.Find(Id);
+
+      if (contact == null)
+        return RedirectToAction(nameof(Index));
+
+      return View(contact);
+    }
+
   }
 }
