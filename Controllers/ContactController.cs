@@ -43,5 +43,16 @@ namespace ASPNetMVC.Controllers
       return View(contacts);
     }
 
+
+    public IActionResult Edit(int id)
+    {
+      var contacts = _context.Contacts.Find(id);
+      if (contacts == null)
+        return NotFound();
+
+
+      return View();
+    }
+
   }
 }
