@@ -77,5 +77,15 @@ namespace ASPNetMVC.Controllers
       return View(contact);
     }
 
+    public ActionResult Delete(int Id)
+    {
+      var contact = _context.Contacts.Find(Id);
+
+      if (contact == null)
+        return RedirectToAction(nameof(Index));
+
+      return View(contact);
+    }
+
   }
 }
