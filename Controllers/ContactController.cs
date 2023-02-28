@@ -44,14 +44,27 @@ namespace ASPNetMVC.Controllers
     }
 
 
-    public IActionResult Edit(int id)
+    public IActionResult Edit(int Id)
     {
-      var contacts = _context.Contacts.Find(id);
+      var contacts = _context.Contacts.Find(Id);
       if (contacts == null)
-        return NotFound();
+        return RedirectToAction(nameof(Index));
 
 
       return View();
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Contact contact)
+    {
+      var contactDb = _context.Contacts.Find(contact.Id);
+      contactDb.Name = contact.Name;
+      contactDb.Phone = contact.Phone;
+      contactDb.IsActive = contact.IsActive;
+      _context.Contacts.Update(contactDb);
+      _context.SaveChanges();
+
+      return RedirectToAction(nameof(Index));
     }
 
   }
